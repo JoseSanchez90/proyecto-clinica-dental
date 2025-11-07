@@ -37,7 +37,7 @@ export default function Home() {
               <div className="relative top-20 lg:top-50 xl:top-45 2xl:top-50 lg:left-30 2xl:left-10 w-full mx-auto max-w-xs lg:max-w-sm xl:max-w-md 2xl:max-w-2xl space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6">
                 <div className="flex items-center">
                   <div className="text-start -tracking-widest text-blue-600">
-                    <p className="text-4xl lg:text-5xl xl:text-4xl 2xL:text-7xl font-extrabold">
+                    <p className="text-4xl lg:text-5xl xl:text-4xl 2xl:text-7xl font-extrabold">
                       CLINICA DENTAL
                     </p>
                     <p className="text-4xl lg:text-5xl xl:text-4xl 2xl:text-7xl font-extrabold">
