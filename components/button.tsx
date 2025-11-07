@@ -33,6 +33,27 @@ export const ButtonDesktop: React.FC<ButtonProps> = ({
   );
 };
 
+export const ButtonDesktopSecondary: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  className = "",
+  icon,
+  type = "button",
+}) => {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      onClick={onClick}
+      type={type}
+      className={`hidden md:inline-flex items-center gap-2 border border-gray-500 bg-white text-black font-medium px-10 py-4 rounded-full transition-all duration-150 cursor-pointer ${className}`}
+    >
+      {icon && <span className="text-lg">{icon}</span>}
+      {label}
+    </motion.button>
+  );
+};
+
 // 📱 Versión para móvil
 export const ButtonMobile: React.FC<ButtonProps> = ({
   label,
@@ -48,6 +69,27 @@ export const ButtonMobile: React.FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
       className={`inline-flex md:hidden items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2 rounded-full transition-all duration-150 hover:bg-blue-700 ${className}`}
+    >
+      {icon && <span className="text-lg">{icon}</span>}
+      {label}
+    </motion.button>
+  );
+};
+
+export const ButtonMobileSecondary: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  className = "",
+  icon,
+  type = "button",
+}) => {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      type={type}
+      className={`inline-flex md:hidden items-center gap-2 border border-gray-500 bg-white text-black font-medium px-3 py-1 rounded-full transition-all duration-150 hover:bg-blue-700 ${className}`}
     >
       {icon && <span className="text-lg">{icon}</span>}
       {label}

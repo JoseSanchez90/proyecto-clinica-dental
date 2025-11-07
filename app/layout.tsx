@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import { chillax } from "./fonts/chillax";
 import SmoothScroll from "./components/SmoothScroll";
+import NavbarMobile from "./components/navbarMobile";
 
 export const metadata: Metadata = {
   title: "Create Next App",
