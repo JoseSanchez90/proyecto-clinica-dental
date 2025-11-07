@@ -18,14 +18,14 @@ export default function Home() {
         className="relative flex items-center justify-center w-full h-screen text-center overflow-hidden"
       >
         {/* Fondo con las palabras grandes */}
-        <div className="absolute inset-0 flex flex-col items-start justify-center text-blue-400 select-none pointer-events-none lg:pt-0 xl:pt-16 lg:px-10 xl:px-60 2xl:px-70">
-          <h1 className="lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10">
+        <div className="absolute inset-0 flex flex-col items-start justify-center text-blue-400 select-none pointer-events-none pt-25 lg:pt-0 xl:pt-16 lg:px-10 xl:px-60 2xl:px-70">
+          <h1 className="text-[4.2rem] lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10">
             SEGURIDAD
           </h1>
-          <h1 className="lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10">
+          <h1 className="text-[4.2rem] lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10 pt-25 md:pt-0">
             CONFIANZA
           </h1>
-          <h1 className="lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10">
+          <h1 className="text-[4.2rem] lg:text-[10rem] xl:text-[10rem] 2xl:text-[15rem] font-bold leading-none tracking-tight opacity-10 pt-25 md:pt-0 ">
             SONRISA
           </h1>
         </div>
