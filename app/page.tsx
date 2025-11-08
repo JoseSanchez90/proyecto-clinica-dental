@@ -34,7 +34,7 @@ export default function Home() {
         <div className="relative z-10">
           <div className="w-full flex flex-col">
             <div className="flex flex-col lg:flex-row gap-10 lg:gap-30 xl:gap-20 2xl:gap-10">
-              <div className="relative top-20 lg:top-50 xl:top-45 2xl:top-50 lg:left-30 2xl:left-10 w-full mx-auto max-w-xs lg:max-w-sm xl:max-w-md 2xl:max-w-2xl space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6">
+              <div className="relative top-18 lg:top-50 xl:top-45 2xl:top-50 lg:left-30 2xl:left-10 w-full mx-auto max-w-xs lg:max-w-sm xl:max-w-md 2xl:max-w-2xl space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6">
                 <div className="flex items-center">
                   <div className="text-start -tracking-widest text-blue-600">
                     <p className="text-4xl lg:text-5xl xl:text-4xl 2xl:text-7xl font-extrabold">
@@ -89,7 +89,7 @@ export default function Home() {
                 El{" "}
                 <Highlighter action="underline" color="#38A169">
                   cuidado dental
-                </Highlighter> no es solo un servicio, es un espacio de tranquilidad es un donde tu salud oral
+                </Highlighter> no es solo un servicio, es un espacio de tranquilidad es un donde tu salud oral{" "}
                 <Highlighter action="highlight" color="#FDE047">
                   es importante
                 </Highlighter>
