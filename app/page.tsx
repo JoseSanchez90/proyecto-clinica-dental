@@ -84,15 +84,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="max-w-xs lg:max-w-lg xl:max-w-xl 2xl:max-w-3xl mx-auto relative bottom-15 lg:bottom-20 xl:bottom-20 2xl:bottom-10">
+            <div className="max-w-xs lg:max-w-lg xl:max-w-xl 2xl:max-w-3xl mx-auto relative bottom-15 lg:bottom-10 xl:bottom-20 2xl:bottom-10">
               <p className="text-zinc-700 font-medium text-xs lg:text-sm 2xl:text-lg space-y-1 md:space-y-0">
                 El{" "}
                 <Highlighter action="underline" color="#38A169">
                   cuidado dental
                 </Highlighter> no es solo un servicio, es un espacio de tranquilidad es un donde tu salud oral{" "}
-                <Highlighter action="highlight" color="#FDE047">
-                  es importante
-                </Highlighter>
+                <Highlighter action="highlight" color="#FDE047"> es importante</Highlighter>
               </p>
             </div>
           </div>
@@ -107,7 +105,7 @@ export default function Home() {
         <Cleaning />
       </section>
 
-      <section id="nosotros" className="w-full h-screen">
+      <section id="nosotros" className="w-full min-h-screen">
         <About />
       </section>
     </div>

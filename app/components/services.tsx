@@ -58,7 +58,7 @@ const TypeServices = [
 
 function Services() {
   return (
-    <div className="w-full max-w-360 mx-auto h-screen flex flex-col lg:gap-20 xl:gap-5 2xl:gap-10 justify-center items-start xl:pt-14 2xl:pt-10">
+    <div className="w-full max-w-360 mx-auto h-screen flex flex-col lg:gap-20 xl:gap-10 2xl:gap-10 justify-center items-start xl:pt-14 2xl:pt-10">
       <div className="leading-20 text-center mx-auto px-4">
         <p className="text-2xl lg:text-[40px] 2xl:text-[70px] font-semibold text-zinc-700 xl:leading-2 2xl:leading-10">
           Cuidando tu{" "}
