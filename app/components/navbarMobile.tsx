@@ -81,7 +81,7 @@ export default function NavbarMobile() {
       )}
     >
       {/* Logo */}
-      <p className="text-cyan-600 font-bold text-3xl">SMILE</p>
+      <p className="text-cyan-600 font-bold text-2xl">Smile</p>
 
       {/* Botón hamburguesa */}
       <button
