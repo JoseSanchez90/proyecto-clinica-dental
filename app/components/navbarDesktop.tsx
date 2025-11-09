@@ -69,7 +69,7 @@ export default function NavbarDesktop() {
       )}
     >
       <div className="flex items-center justify-between w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-6">
-        <p className="text-blue-600 font-bold lg:text-xl xl:text-2xl 2xl:text-3xl">SMILE</p>
+        <p className="text-cyan-600 font-bold lg:text-xl xl:text-2xl 2xl:text-3xl">SMILE</p>
 
         <div className="flex gap-4">
           {links.map((item) => (

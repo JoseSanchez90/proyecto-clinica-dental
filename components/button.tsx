@@ -89,7 +89,7 @@ export const ButtonMobileSecondary: React.FC<ButtonProps> = ({
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
       type={type}
-      className={`inline-flex md:hidden items-center gap-2 border border-gray-500 bg-white text-black font-medium px-3 py-1 rounded-full transition-all duration-150 hover:bg-blue-700 ${className}`}
+      className={`inline-flex md:hidden items-center gap-2 border border-gray-500 bg-white text-black font-medium px-5 py-2 rounded-full transition-all duration-150 hover:bg-blue-700 ${className}`}
     >
       {icon && <span className="text-lg">{icon}</span>}
       {label}

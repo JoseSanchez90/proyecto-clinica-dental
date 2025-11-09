@@ -76,12 +76,12 @@ export default function NavbarMobile() {
   return (
     <nav
       className={clsx(
-        "fixed top-0 left-0 w-full z-40 flex items-center justify-between px-8 py-2 transition-all duration-300 lg:hidden",
+        "fixed top-0 left-0 w-full z-20 flex items-center justify-between px-8 py-2 transition-all duration-300 lg:hidden",
         isScrolled ? "bg-white/70 backdrop-blur-sm" : "bg-transparent"
       )}
     >
       {/* Logo */}
-      <p className="text-blue-600 font-bold text-3xl">SMILE</p>
+      <p className="text-cyan-600 font-bold text-3xl">SMILE</p>
 
       {/* Botón hamburguesa */}
       <button
@@ -101,7 +101,7 @@ export default function NavbarMobile() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 right-0 h-screen w-3/4 bg-white shadow-2xl z-50 flex flex-col justify-between pt-32 pb-10 overflow-y-auto"
+            className="fixed top-0 right-0 h-screen w-3/4 bg-white shadow-2xl z-30 flex flex-col justify-between pt-32 pb-10 overflow-y-auto"
           >
             {/* Botón cerrar */}
             <button
