@@ -68,7 +68,7 @@ export default function Home() {
                   />
                   <ButtonMobile
                     label="Hablemos"
-                    icon={<FaWhatsapp className="w-5 h-5" />}
+                    icon={<FaWhatsapp className="w-4 h-4" />}
                   />
                 </a>
                 <a href="#nosotros">
