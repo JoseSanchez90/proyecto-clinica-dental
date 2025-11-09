@@ -8,6 +8,9 @@ import { ButtonDesktop, ButtonDesktopSecondary } from "@/components/button";
 import { Highlighter } from "@/components/ui/highlighter";
 import About from "./components/about";
 import Cleaning from "./components/cleaning";
+import Comments from "./components/comments";
+import Faqs from "./components/faqs";
+import Appointment from "./components/appointment";
 
 export default function Home() {
   return (
@@ -89,8 +92,13 @@ export default function Home() {
                 El{" "}
                 <Highlighter action="underline" color="#38A169">
                   cuidado dental
-                </Highlighter> no es solo un servicio, es un espacio de tranquilidad es un donde tu salud oral{" "}
-                <Highlighter action="highlight" color="#FDE047"> es importante</Highlighter>
+                </Highlighter>{" "}
+                no es solo un servicio, es un espacio de tranquilidad es un
+                donde tu salud oral{" "}
+                <Highlighter action="highlight" color="#FDE047">
+                  {" "}
+                  es importante
+                </Highlighter>
               </p>
             </div>
           </div>
@@ -101,12 +109,24 @@ export default function Home() {
         <Services />
       </section>
 
-      <section id="limpieza" className="w-full h-screen">
+      <section className="w-full h-screen">
         <Cleaning />
       </section>
 
       <section id="nosotros" className="w-full min-h-screen">
         <About />
+      </section>
+
+      <section className="w-full h-full">
+        <Comments />
+      </section>
+
+      <section className="w-full h-full">
+        <Faqs />
+      </section>
+
+      <section id="cita" className="w-full min-h-screen">
+        <Appointment />
       </section>
     </div>
   );

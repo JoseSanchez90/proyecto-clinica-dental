@@ -4,6 +4,7 @@ import Navbar from "./components/navbar";
 import { chillax } from "./fonts/chillax";
 import SmoothScroll from "./components/SmoothScroll";
 import NavbarMobile from "./components/navbarMobile";
+import Footer from "./components/footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +23,8 @@ export default function RootLayout({
       >
         <SmoothScroll />
         <Navbar />
-        {children}
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

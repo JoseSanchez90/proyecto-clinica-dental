@@ -19,7 +19,7 @@ export const Card = React.memo(
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
+        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-70 2xl:h-96 w-full transition-all duration-300 ease-out",
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}
     >
@@ -36,9 +36,9 @@ export const Card = React.memo(
       >
         <div className="font-medium bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-200">
           <div className="flex flex-col gap-4">
-            <p className="text-xl md:text-2xl font-bold">{card.title}</p>
-            <p className="text-lg md:text-xl italic font-semibold">{card.subtitle}</p>
-            <p className="text-lg md:text-xl font-medium">{card.description}</p>
+            <p className="text-base 2xl:text-2xl font-bold">{card.title}</p>
+            <p className="text-sm 2xl:text-xl italic font-semibold">{card.subtitle}</p>
+            <p className="text-sm 2xl:text-xl font-medium">{card.description}</p>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 xl:max-w-2xl 2xl:max-w-5xl mx-auto md:px-8 w-full">
       {cards.map((card, index) => (
         <Card
           key={card.title}

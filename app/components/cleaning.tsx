@@ -28,8 +28,8 @@ const Process = [
 function Cleaning() {
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-16 lg:gap-10 xl:gap-20 2xl:gap-30">
-      <div className="text-zinc-700 text-2xl lg:text-4xl xl:text-5xl 2xl:text-7xl text-center font-semibold">
-        <p>
+      <div className="text-zinc-700 text-2xl lg:text-[40px] 2xl:text-[70px] text-center font-semibold">
+        <p className="xl:leading-8 2xl:leading-10">
           ¿Como seria el <span className="text-blue-600">proceso</span> de
         </p>
         <p>
