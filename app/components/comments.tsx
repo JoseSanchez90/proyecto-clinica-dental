@@ -46,7 +46,7 @@ function Comments() {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="flex flex-col gap-10 lg:gap-16 xl:gap-10 pt-50 pb-20 lg:pt-0 lg:pb-0 lg:py-16 2xl:gap-20 xl:py-40 2xl:py-50">
+      <div className="flex flex-col gap-10 lg:gap-16 xl:gap-10 pt-40 pb-40 lg:pt-0 lg:pb-0 lg:py-16 2xl:gap-20 xl:py-40 2xl:py-50">
         <div className="max-w-xs lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto flex flex-col justify-center items-center gap-2 lg:gap-4 xl:gap-8">
           <h2 className="text-zinc-700 text-2xl lg:text-[40px] 2xl:text-[70px] text-center font-semibold xl:leading-2 2xl:leading-10">
             Lo que dicen{" "}

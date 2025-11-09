@@ -34,7 +34,7 @@ function Faqs() {
   };
 
   return (
-    <div className="w-full h-full max-w-xs lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto flex flex-col justify-center items-center bg-zinc-100 2xl:py-20">
+    <div className="w-full h-full max-w-xs lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-10 lg:py-0 flex flex-col justify-center items-center bg-zinc-100 2xl:py-20">
       {/* Título */}
       <div className="flex flex-col text-center mb-12 gap-2 lg:gap-4">
         <h2 className="text-zinc-700 text-2xl lg:text-[40px] 2xl:text-[70px] text-center font-semibold">

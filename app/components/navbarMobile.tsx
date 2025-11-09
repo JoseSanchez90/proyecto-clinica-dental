@@ -9,7 +9,6 @@ import { BsFacebook, BsInstagram } from "react-icons/bs";
 const links = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Limpieza", href: "#limpieza" },
   { label: "Nosotros", href: "#nosotros" },
 ];
 
