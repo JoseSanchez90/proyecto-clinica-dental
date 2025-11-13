@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
 
 export default function Appointment() {
   const [step, setStep] = useState(1);
@@ -41,6 +41,7 @@ export default function Appointment() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // 🔹 Control de pasos
   const handleNext = () => {
     if (validateStep()) setStep((prev) => prev + 1);
   };
@@ -59,6 +60,7 @@ export default function Appointment() {
     if (validateStep()) setShowModal(true);
   };
 
+  // 🔹 Control del scroll al mostrar el modal
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -81,286 +83,348 @@ export default function Appointment() {
   }, [showModal]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-100 px-4">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-semibold text-center text-gray-900 mb-2">
-          Agendar Cita
-        </h2>
-        <p className="text-center text-gray-500 mb-8">
-          Un proceso simple en tres pasos para reservar tu próxima visita.
-        </p>
-
-        {/* Indicador de pasos */}
-        <div className="flex justify-between items-center mb-10">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="flex-1 flex flex-col items-center relative">
-              <div
-                className={`rounded-full w-10 h-10 flex items-center justify-center font-semibold ${
-                  step >= n
-                    ? "bg-blue-600 text-white"
-                    : "border-2 border-blue-600 text-blue-600 bg-white"
-                }`}
-              >
-                {n}
-              </div>
-              {n < 3 && (
-                <div
-                  className={`absolute top-5 left-[70%] md:left-[60%] w-full h-0.5 ${
-                    step > n ? "bg-blue-600" : "bg-gray-300"
-                  }`}
-                />
-              )}
+    <section className="w-full min-h-screen bg-zinc-100 px-6 flex justify-center items-center">
+      <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-10 xl:gap-16 py-10 pt-20 2xl:pt-0 2xl:py-0">
+        {/* ==== FORMULARIO MULTIPASO ==== */}
+        <div className="xl:col-span-2 flex flex-col gap-4 2xl:gap-10">
+          <div className="flex flex-col gap-2 2xl:gap-4">
+            <h2 className="text-2xl lg:text-2xl 2xl:text-4xl font-semibold text-zinc-700">
+              Reserva <span className="text-blue-600">tu cita</span>
+            </h2>
+            <div className="flex flex-col xl:flex-row 2xl:flex-col text-2xl lg:text-2xl 2xl:text-4xl font-bold gap-x-2">
+              <h3 className="text-blue-600">Agenda tu atención dental</h3>
+              <h4 className="text-zinc-700">en pocos pasos</h4>
             </div>
-          ))}
+            <p className="text-zinc-600 text-base 2xl:text-lg font-medium leading-relaxed">
+              En <span className="text-blue-600 font-semibold">Smile</span> te
+              ayudamos a reservar tu consulta de forma rápida y segura. Completa
+              los pasos y confirma tu cita con uno de nuestros especialistas.
+            </p>
+          </div>
+
+          {/* ===== FORM STEPS ===== */}
+          <form className="bg-white border border-gray-300 rounded-2xl p-6 2xl:p-8 shadow-lg">
+            <div className="relative overflow-hidden mx-auto 2xl:min-h-80">
+              <AnimatePresence mode="wait">
+                {/* 🔹 Paso 1 */}
+                {step === 1 && (
+                  <div className="space-y-2 2xl:space-y-5">
+                    <h3 className="text-lg 2xl:text-xl font-semibold text-zinc-800">
+                      Paso 1: Seleccionar Cita
+                    </h3>
+                    <motion.div
+                      key="step1"
+                      initial={{ x: 80, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -80, opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex flex-col gap-2 2xl:gap-5"
+                    >
+                      {/* Fecha */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Fecha
+                        </label>
+                        <input
+                          type="date"
+                          name="fecha"
+                          value={formData.fecha}
+                          onChange={handleChange}
+                          className={`w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none ${
+                            errors.fecha ? "border-red-500" : "border-zinc-300"
+                          }`}
+                        />
+                        {errors.fecha && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.fecha}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Hora */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Hora
+                        </label>
+                        <select
+                          name="hora"
+                          value={formData.hora}
+                          onChange={handleChange}
+                          className={`w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none ${
+                            errors.hora ? "border-red-500" : "border-zinc-300"
+                          }`}
+                        >
+                          <option value="">Seleccionar hora...</option>
+                          <option value="09:00 am">09:00 am</option>
+                          <option value="10:00 am">10:00 am</option>
+                          <option value="11:00 am">11:00 am</option>
+                          <option value="03:00 pm">03:00 pm</option>
+                          <option value="04:00 pm">04:00 pm</option>
+                          <option value="05:00 pm">05:00 pm</option>
+                        </select>
+                        {errors.hora && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.hora}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Tipo de consulta */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Tipo de Consulta
+                        </label>
+                        <select
+                          name="tipoConsulta"
+                          value={formData.tipoConsulta}
+                          onChange={handleChange}
+                          className={`w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none ${
+                            errors.tipoConsulta
+                              ? "border-red-500"
+                              : "border-zinc-300"
+                          }`}
+                        >
+                          <option value="">Seleccionar...</option>
+                          <option value="Odontología General">
+                            Odontología General
+                          </option>
+                          <option value="Ortodoncia">Ortodoncia</option>
+                          <option value="Endodoncia">Endodoncia</option>
+                          <option value="Implantes Dentales">
+                            Implantes Dentales
+                          </option>
+                          <option value="Limpieza Dental">
+                            Limpieza Dental
+                          </option>
+                        </select>
+                        {errors.tipoConsulta && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.tipoConsulta}
+                          </p>
+                        )}
+                      </div>
+
+                      <button
+                        onClick={handleNext}
+                        type="button"
+                        className="bg-blue-600 text-white px-10 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
+                      >
+                        Siguiente
+                      </button>
+                    </motion.div>
+                  </div>
+                )}
+
+                {/* 🔹 Paso 2 */}
+                {step === 2 && (
+                  <div className="space-y-2 2xl:space-y-5">
+                    <h3 className="text-xl font-semibold text-zinc-800">
+                      Paso 2: Datos Personales
+                    </h3>
+                    <motion.div
+                      key="step2"
+                      initial={{ x: 80, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -80, opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex flex-col gap-2 2xl:gap-5"
+                    >
+                      {["nombre", "telefono", "correo"].map((field) => (
+                        <div key={field}>
+                          <label className="block text-sm font-medium mb-1 capitalize">
+                            {field === "correo"
+                              ? "Correo Electrónico"
+                              : field === "telefono"
+                              ? "Teléfono"
+                              : "Nombre Completo"}
+                          </label>
+                          <input
+                            type={
+                              field === "correo"
+                                ? "email"
+                                : field === "telefono"
+                                ? "tel"
+                                : "text"
+                            }
+                            name={field}
+                            value={(formData as any)[field]}
+                            onChange={handleChange}
+                            className={`w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none ${
+                              errors[field]
+                                ? "border-red-500"
+                                : "border-zinc-300"
+                            }`}
+                          />
+                          {errors[field] && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors[field]}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+
+                      <div className="flex justify-between gap-3">
+                        <button
+                          onClick={handlePrev}
+                          type="button"
+                          className="border border-blue-600 text-blue-600 px-10 py-2 rounded-lg font-medium hover:bg-blue-50 transition-all cursor-pointer"
+                        >
+                          Atrás
+                        </button>
+                        <button
+                          onClick={handleNext}
+                          type="button"
+                          className="bg-blue-600 text-white px-10 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all cursor-pointer"
+                        >
+                          Siguiente
+                        </button>
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
+
+                {/* 🔹 Paso 3 */}
+                {step === 3 && (
+                  <div className="space-y-2 2xl:space-y-5">
+                    <h3 className="text-xl font-semibold text-zinc-800">
+                      Paso 3: Confirmación
+                    </h3>
+                    <motion.div
+                      key="step3"
+                      initial={{ x: 80, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -80, opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex flex-col gap-2 2xl:gap-5"
+                    >
+                      <p className="text-zinc-600">
+                        Revisa los datos ingresados antes de enviar tu solicitud
+                        de cita.
+                      </p>
+
+                      <div className="bg-zinc-50 rounded-lg p-4 text-zinc-700 space-y-1">
+                        <p>
+                          <strong>Fecha:</strong> {formData.fecha}
+                        </p>
+                        <p>
+                          <strong>Hora:</strong> {formData.hora}
+                        </p>
+                        <p>
+                          <strong>Consulta:</strong> {formData.tipoConsulta}
+                        </p>
+                        <p>
+                          <strong>Nombre:</strong> {formData.nombre}
+                        </p>
+                        <p>
+                          <strong>Teléfono:</strong> {formData.telefono}
+                        </p>
+                        <p>
+                          <strong>Correo:</strong> {formData.correo}
+                        </p>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <button
+                          onClick={handlePrev}
+                          type="button"
+                          className="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg font-medium hover:bg-blue-50 transition-all"
+                        >
+                          Atrás
+                        </button>
+                        <button
+                          onClick={handleSubmit}
+                          type="submit"
+                          className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
+                        >
+                          Enviar Cita
+                        </button>
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
+              </AnimatePresence>
+            </div>
+          </form>
         </div>
 
-        {/* Contenido animado */}
-        <div className="relative overflow-hidden min-h-[300px]">
-          <AnimatePresence mode="wait">
-            {/* Paso 1 */}
-            {step === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ x: 80, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -80, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-5"
-              >
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Paso 1: Seleccionar Cita
-                </h3>
+        {/* ==== INFORMACIÓN LATERAL ==== */}
+        <div className="flex flex-col gap-6 pt-10 2xl:pt-0">
+          <div className="bg-blue-600 text-white text-base 2xl:text-lg font-medium rounded-2xl p-6 shadow-lg">
+            <h3 className="mb-4">Horario de atención</h3>
+            <div className="flex flex-col gap-2 text-sm 2xl:text-base">
+              <div className="flex justify-between">
+                <span>Lunes a Viernes</span>
+                <span>09:00 - 22:00</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Sábado</span>
+                <span>11:00 - 20:00</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Domingo</span>
+                <span>Cerrado</span>
+              </div>
+            </div>
+          </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Fecha
-                  </label>
-                  <input
-                    type="date"
-                    name="fecha"
-                    value={formData.fecha}
-                    onChange={handleChange}
-                    className={`w-full border rounded-lg p-2 ${
-                      errors.fecha ? "border-red-500" : "border-gray-300"
-                    }`}
-                  />
-                  {errors.fecha && (
-                    <p className="text-red-500 text-sm mt-1">{errors.fecha}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">Hora</label>
-                  <select
-                    name="hora"
-                    value={formData.hora}
-                    onChange={handleChange}
-                    className={`w-full border rounded-lg p-2 ${
-                      errors.hora ? "border-red-500" : "border-gray-300"
-                    }`}
-                  >
-                    <option value="">Seleccionar hora...</option>
-                    <option value="09:00 am">09:00 am</option>
-                    <option value="10:00 am">10:00 am</option>
-                    <option value="11:00 am">11:00 am</option>
-                    <option value="03:00 pm">03:00 pm</option>
-                    <option value="04:00 pm">04:00 pm</option>
-                    <option value="05:00 pm">05:00 pm</option>
-                  </select>
-                  {errors.hora && (
-                    <p className="text-red-500 text-sm mt-1">{errors.hora}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Tipo de Consulta
-                  </label>
-                  <select
-                    name="tipoConsulta"
-                    value={formData.tipoConsulta}
-                    onChange={handleChange}
-                    className={`w-full border rounded-lg p-2 ${
-                      errors.tipoConsulta ? "border-red-500" : "border-gray-300"
-                    }`}
-                  >
-                    <option value="">Seleccionar...</option>
-                    <option value="Odontología General">
-                      Odontología General
-                    </option>
-                    <option value="Ortodoncia">Ortodoncia</option>
-                    <option value="Endodoncia">Endodoncia</option>
-                    <option value="Implantes Dentales">
-                      Implantes Dentales
-                    </option>
-                    <option value="Limpieza Dental">Limpieza Dental</option>
-                  </select>
-                  {errors.tipoConsulta && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.tipoConsulta}
-                    </p>
-                  )}
-                </div>
-
-                <button
-                  onClick={handleNext}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
-                >
-                  Siguiente
-                </button>
-              </motion.div>
-            )}
-
-            {/* Paso 2 */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ x: 80, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -80, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-5"
-              >
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Paso 2: Datos Personales
-                </h3>
-
-                {["nombre", "telefono", "correo"].map((field) => (
-                  <div key={field}>
-                    <label className="block text-sm font-medium mb-1 capitalize">
-                      {field === "correo"
-                        ? "Correo Electrónico"
-                        : field === "telefono"
-                        ? "Teléfono"
-                        : "Nombre Completo"}
-                    </label>
-                    <input
-                      type={
-                        field === "correo"
-                          ? "email"
-                          : field === "telefono"
-                          ? "tel"
-                          : "text"
-                      }
-                      name={field}
-                      value={(formData as any)[field]}
-                      onChange={handleChange}
-                      className={`w-full border rounded-lg p-2 ${
-                        errors[field] ? "border-red-500" : "border-gray-300"
-                      }`}
-                    />
-                    {errors[field] && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors[field]}
-                      </p>
-                    )}
-                  </div>
-                ))}
-
-                <div className="flex gap-3">
-                  <button
-                    onClick={handlePrev}
-                    className="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg font-medium hover:bg-blue-50 transition-all"
-                  >
-                    Atrás
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
-                  >
-                    Siguiente
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Paso 3 */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ x: 80, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -80, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-6"
-              >
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Paso 3: Confirmación
-                </h3>
-                <p className="text-gray-600">
-                  Revisa los datos ingresados antes de enviar tu solicitud de
-                  cita.
-                </p>
-
-                <div className="bg-gray-50 rounded-lg p-4 text-gray-700">
-                  <p>
-                    <strong>Fecha:</strong> {formData.fecha}
-                  </p>
-                  <p>
-                    <strong>Hora:</strong> {formData.hora}
-                  </p>
-                  <p>
-                    <strong>Consulta:</strong> {formData.tipoConsulta}
-                  </p>
-                  <p>
-                    <strong>Nombre:</strong> {formData.nombre}
-                  </p>
-                  <p>
-                    <strong>Teléfono:</strong> {formData.telefono}
-                  </p>
-                  <p>
-                    <strong>Correo:</strong> {formData.correo}
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    onClick={handlePrev}
-                    className="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg font-medium hover:bg-blue-50 transition-all"
-                  >
-                    Atrás
-                  </button>
-                  <button
-                    onClick={handleSubmit}
-                    className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
-                  >
-                    Enviar Cita
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="bg-white rounded-2xl p-6 shadow-md">
+            <p className="text-zinc-600 text-base 2xl:text-lg font-medium leading-relaxed">
+              En <span className="text-blue-600 font-semibold">Smile</span>,
+              creemos que cada sonrisa merece atención especial. Nuestro equipo
+              está listo para ofrecerte un servicio cálido y profesional con la
+              mejor tecnología dental.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Modal de confirmación */}
-      {showModal && (
-        <motion.div
-          className="fixed inset-0 flex items-center justify-center bg-black/90 backdrop-blur-sm z-30"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
+      {/* 🔹 MODAL DE CONFIRMACIÓN */}
+      <AnimatePresence>
+        {showModal && (
           <motion.div
-            className="bg-white rounded-xl p-6 text-center shadow-xl max-w-sm w-full"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            className="fixed inset-0 bg-black/40 flex justify-center items-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              ¡Cita enviada!
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Tu solicitud ha sido registrada correctamente. Nos pondremos en
-              contacto contigo pronto.
-            </p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 cursor-pointer"
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center"
             >
-              Cerrar
-            </button>
+              <CheckCircle className="text-green-500 w-14 h-14 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-zinc-800 mb-2">
+                ¡Cita Enviada con Éxito!
+              </h3>
+              <p className="text-zinc-600 text-sm mb-6">
+                Gracias por reservar tu cita con{" "}
+                <span className="text-blue-600 font-medium">Smile</span>.
+                Nuestro equipo se pondrá en contacto contigo pronto para
+                confirmar los detalles.
+              </p>
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  setStep(1);
+                  setFormData({
+                    fecha: "",
+                    hora: "",
+                    tipoConsulta: "",
+                    nombre: "",
+                    telefono: "",
+                    correo: "",
+                  });
+                }}
+                className="bg-blue-600 text-white font-medium px-6 py-2 rounded-full hover:bg-blue-700 transition-all"
+              >
+                Cerrar
+              </button>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }

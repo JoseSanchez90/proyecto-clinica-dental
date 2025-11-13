@@ -1,118 +1,147 @@
-import { ArrowDown, ArrowRight } from "lucide-react";
-import Image from "next/image";
-import Odontologia from "@/public/images/odontologia.svg";
-import Estetica from "@/public/images/estetica.svg";
-import Ortodoncia from "@/public/images/ortodoncia.svg";
-import Implantes from "@/public/images/implantes.svg";
-import { Highlighter } from "@/components/ui/highlighter";
+"use client";
 
-const TypeServices = [
+import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
+import { useEffect } from "react";
+import { FaTooth, FaTeeth, FaSmile, FaUserMd } from "react-icons/fa";
+import CurvedLoop from "@/components/CurvedLoop";
+
+const services = [
   {
-    tittle: "Odontología General",
-    descripcion:
-      "Cuida tu salud bucal con revisiones y limpiezas profesionales.",
-    icon: (
-      <Image
-        src={Odontologia}
-        alt="Odontologia-imagen"
-        className="w-8 xl:w-8 2xl:w-12 h-8 xl:h-8 2xl:h-12"
-      />
-    ),
+    title: "Odontología General",
+    description:
+      "Atención completa para mantener la salud bucal, desde limpiezas hasta tratamientos preventivos.",
+    image: "/images/odontologia.webp",
+    icon: <FaTooth className="text-white w-6 h-6" />,
   },
   {
-    tittle: "Estética Dental",
-    descripcion:
-      "Consigue una sonrisa radiante con blanqueamientos y carillas.",
-    icon: (
-      <Image
-        src={Estetica}
-        alt="Estetica-imagen"
-        className="w-8 xl:w-8 2xl:w-12 h-8 xl:h-8 2xl:h-12"
-      />
-    ),
+    title: "Implantes Dentales",
+    description:
+      "Reemplazamos piezas dentales con implantes seguros y estéticos, para una sonrisa natural y funcional.",
+    image: "/images/implantes.webp",
+    icon: <FaUserMd className="text-white w-6 h-6" />,
   },
   {
-    tittle: "Ortodoncia",
-    descripcion: "Alinea tu sonrisa con brackets o alineadores invisibles.",
-    icon: (
-      <Image
-        src={Ortodoncia}
-        alt="Ortodoncia-imagen"
-        className="w-8 xl:w-8 2xl:w-12 h-8 xl:h-8 2xl:h-12"
-      />
-    ),
+    title: "Blanqueamiento Dental",
+    description:
+      "Tratamientos de blanqueamiento profesional que devuelven el brillo y la confianza a tu sonrisa.",
+    image: "/images/blanqueamiento.webp",
+    icon: <FaSmile className="text-white w-6 h-6" />,
   },
   {
-    tittle: "Implantes Dentales",
-    descripcion:
-      "Recupera la funcionalidad y estética de tus dientes perdidos.",
-    icon: (
-      <Image
-        src={Implantes}
-        alt="Implantes-imagen"
-        className="w-8 xl:w-8 2xl:w-12 h-8 xl:h-8 2xl:h-12"
-      />
-    ),
+    title: "Ortodoncia",
+    description:
+      "Corrección de la posición dental con brackets y alineadores modernos para una sonrisa perfecta.",
+    image: "/images/ortodoncia.webp",
+    icon: <FaTeeth className="text-white w-6 h-6" />,
   },
 ];
 
 function Services() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false, // desactivamos loop para que no sea infinito
+    align: "start", // evita el desplazamiento fuera del viewport
+  });
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.reInit();
+  }, [emblaApi]);
+
   return (
-    <div className="w-full max-w-360 mx-auto h-screen flex flex-col lg:gap-20 xl:gap-10 2xl:gap-10 justify-center items-start xl:pt-14 2xl:pt-10">
-      <div className="leading-20 text-center mx-auto px-4">
-        <p className="text-2xl lg:text-[40px] 2xl:text-[70px] font-semibold text-zinc-700 xl:leading-8 2xl:leading-10">
-          Cuidando tu{" "}
-          <span className="text-blue-600 font-extrabold">sonrisa</span> con
-        </p>
-        <p className="text-2xl lg:text-[40px] 2xl:text-[70px] font-semibold text-zinc-700">
-          precisión y{" "}
-          <span className="text-blue-600 font-extrabold">esmero</span>
-        </p>
-      </div>
-      <div className="w-full justify-center flex flex-col lg:flex-row items-center gap-10 lg:gap-20 2xl:gap-40">
-        <div className="flex flex-row lg:flex-col justify-start items-start content-start place-content-start justify-items-start text-zinc-700 pt-6 lg:pt-0 gap-6 lg:gap-0">
-          <div className="flex flex-col">
-            <p className="text-xl lg:text-3xl 2xl:text-4xl font-semibold">
-              Nuestros
-            </p>
-            <p className="text-xl lg:text-3xl 2xl:text-4xl font-semibold">
-              Servicios
-            </p>
-          </div>
-          <div className="mt-2 lg:mt-4">
-            <Highlighter action="highlight" color="#09C836">
-              <div className="flex gap-4 items-center text-sm xl:text-lg 2xl:text-xl font-medium text-white px-6 py-2">
-                Expertos en
-                <div className="bg-white w-6 lg:w-8 h-6 lg:h-8 rounded-full flex justify-center items-center">
-                  <ArrowRight className="hidden lg:flex w-4 lg:w-5 h-4 lg:h-5 text-green-600" />
-                  <ArrowDown className="flex lg:hidden w-4 lg:w-5 h-4 lg:h-5 text-green-600" />
-                </div>
-              </div>
-            </Highlighter>
+    <section className="w-full min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full lg:max-w-5xl xl:max-w-7xl flex flex-col gap-8 2xl:gap-12 justify-center items-start xl:pt-8 2xl:pt-0">
+        {/* ===== TÍTULOS ===== */}
+        <div className="flex flex-col gap-2 2xl:gap-4 w-full text-start sm:text-left px-6">
+          <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold text-zinc-700">
+            Nuestros <span className="text-blue-600">Servicios</span>
+          </h2>
+          <div className="flex flex-col xl:flex-row 2xl:flex-col text-2xl lg:text-3xl 2xl:text-5xl font-bold leading-tight">
+            <h3 className="text-blue-600">Cuidando tu sonrisa</h3>
+            <h4 className="text-zinc-700">con precisión y esmero</h4>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-6 lg:gap-8 2xl:gap-10 max-w-sm md:max-w-md xl:max-w-xl 2xl:max-w-2xl z-10 px-4 lg:px-0">
-          {TypeServices.map((items, i) => (
+
+        {/* ====== CARDS DESKTOP ====== */}
+        <div className="hidden xl:grid grid-cols-4 gap-6 w-full">
+          {services.map((service, i) => (
             <div
               key={i}
-              className="relative flex flex-col gap-2 items-center justify-center rounded-xl px-4 py-4 xl:px-4 2xl:px-6 xl:py-4 2xl:py-10 bg-blue-600 text-white"
+              className="bg-zinc-100 border border-gray-200 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 flex flex-col"
             >
-              {/* Primera sombra curva */}
-              <div className="absolute inset-0 -z-10 bg-green-400 rounded-lg rotate-2 lg:rotate-[4deg] origin-bottom"></div>
-              {/* Segunda sombra más curva */}
-              <div className="absolute inset-0 -z-20 bg-yellow-300 rounded-lg rotate-4 lg:rotate-[8deg] origin-bottom"></div>
-              <p>{items.icon}</p>
-              <p className="font-semibold text-sm xl:text-base 2xl:text-lg text-center">
-                {items.tittle}
-              </p>
-              <p className="font-medium text-xs xl:text-xs 2xl:text-sm text-center">
-                {items.descripcion}
-              </p>
+              <div className="relative w-full h-32 2xl:h-56">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute -bottom-6 left-6 bg-blue-700 w-12 h-12 flex items-center justify-center rounded-full shadow-lg">
+                  {service.icon}
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 2xl:gap-4 p-6 pt-8 2xl:pt-10">
+                <h3 className="text-lg font-semibold text-zinc-800">
+                  {service.title}
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
+
+        {/* ====== CARDS MOBILE (EMBLA CAROUSEL) ====== */}
+        <div
+          className="xl:hidden w-full overflow-hidden"
+          ref={emblaRef}
+        >
+          <div className="flex gap-6 px-6">
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className="flex-[0_0_80%] lg:flex-[0_0_35%] xl:flex-[0_0_80%] bg-zinc-100 rounded-3xl shadow-md hover:shadow-lg transition-all duration-500 cursor-pointer"
+              >
+                {/* Imagen */}
+                <div className="relative w-full h-52">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover rounded-t-3xl"
+                  />
+                  <div className="absolute -bottom-6 left-6 bg-blue-600 w-12 h-12 flex items-center justify-center rounded-full shadow-lg">
+                    {service.icon}
+                  </div>
+                </div>
+
+                {/* Contenido */}
+                <div className="flex flex-col gap-3 p-6 pt-10">
+                  <h3 className="text-lg font-semibold text-zinc-800">
+                    {service.title}
+                  </h3>
+                  <p className="text-zinc-700 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* ===== CURVED LOOP ===== */}
+      <div className="relative top-8 2xl:top-15 bg-blue-600">
+        <CurvedLoop
+          marqueeText=" Ortodoncia  ✦  Blanqueamiento  ✦  Implante dental  ✦  Brackets  ✦  Cirugía dental  ✦ "
+          speed={1}
+          curveAmount={0}
+          direction="right"
+          interactive={false}
+          className="custom-text-style"
+        />
+      </div>
+    </section>
   );
 }
 

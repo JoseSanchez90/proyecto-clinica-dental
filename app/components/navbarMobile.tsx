@@ -8,8 +8,11 @@ import { BsFacebook, BsInstagram } from "react-icons/bs";
 
 const links = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Servicios", href: "#servicios" },
   { label: "Nosotros", href: "#nosotros" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Casos", href: "#casos" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "¿Preguntas?", href: "#preguntas" },
 ];
 
 const date = [{ label: "Agendar Cita", href: "#cita" }];
@@ -36,9 +39,9 @@ export default function NavbarMobile() {
 
       // Verifica si el toque ocurrió dentro del menú o el botón hamburguesa
       const isInsideMenu = menuRef.current && menuRef.current.contains(target);
-      const isBurgerButton = (target as HTMLElement).closest(
-        "button[aria-label='Abrir menú']"
-      );
+      const isBurgerButton =
+        target instanceof HTMLElement &&
+        target.closest("button[aria-label='Abrir menú']");
 
       if (!isInsideMenu && !isBurgerButton) {
         setIsOpen(false);
@@ -69,27 +72,67 @@ export default function NavbarMobile() {
     if (lenis) lenis.scrollTo(el);
     else el.scrollIntoView({ behavior: "smooth", block: "start" });
 
+    setActiveLink(href);
+
     setIsOpen(false);
     window.history.replaceState(null, "", window.location.pathname);
   };
 
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setActiveLink(`#${id}`);
+
+            window.history.replaceState(null, "", window.location.pathname);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <nav
       className={clsx(
-        "fixed top-0 left-0 w-full z-20 flex items-center justify-between px-8 py-2 transition-all duration-300 lg:hidden",
-        isScrolled ? "bg-white/70 backdrop-blur-sm" : "bg-transparent"
+        "fixed top-0 left-0 w-full z-40 flex items-center justify-between px-8 py-2 transition-all duration-150 lg:hidden",
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
       )}
     >
       {/* Logo */}
-      <p className="text-cyan-600 font-bold text-2xl">Smile</p>
+      <p
+        className={clsx(
+          "font-bold text-2xl transition-all duration-200",
+          isScrolled ? "text-blue-800" : "text-white"
+        )}
+      >
+        Smile
+      </p>
 
       {/* Botón hamburguesa */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-blue-600 p-2 rounded-md focus:outline-none"
+        className="text-blue-800 p-2 rounded-md focus:outline-none"
         aria-label="Abrir menú"
       >
-        {isOpen ? <X size={26} /> : <Menu size={26} />}
+        {isOpen ? (
+          <X size={26} className="text-transparent" />
+        ) : (
+          <Menu
+            size={26}
+            className={clsx(
+              "transition-all duration-200",
+              isScrolled ? "text-blue-800" : "text-white"
+            )}
+          />
+        )}
       </button>
 
       {/* Menú lateral animado */}

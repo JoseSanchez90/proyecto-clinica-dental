@@ -1,112 +1,136 @@
-import { FocusCards } from "@/components/ui/focus-cards";
+"use client";
 import Image from "next/image";
-import Doctor from "@/public/images/doctor.webp";
-import Doctora from "@/public/images/doctora.webp";
-import Doctorm from "@/public/images/doctorm.webp";
-import Doctoram from "@/public/images/doctoram.webp";
+import { FaCheckCircle } from "react-icons/fa";
+import useEmblaCarousel from "embla-carousel-react";
+import { useEffect } from "react";
+import DoctorsCards from "./cardsDoctors";
+import CurvedLoop from "@/components/CurvedLoop";
 
 const cards = [
   {
-    title: "Dr. Alejandro Rivas",
+    title: "Dra. Yuliana Villanueva",
     subtitle: "Especialista en Rehabilitación Oral",
-    description:
-      "Con más de 10 años de experiencia, enfocado en devolver la funcionalidad y estética dental mediante tratamientos personalizados y de alta precisión.",
-    src: "/images/doctor.webp",
+    src: "/images/doctora-1.webp",
+  },
+  {
+    title: "Dr. Ricardo Vega",
+    subtitle: "Especialista en Ortodoncia y Estética Facial",
+    src: "/images/doctor-3.webp",
   },
   {
     title: "Dra. Mariana Torres",
     subtitle: "Odontóloga Estética y Preventiva",
+    src: "/images/doctora-2.webp",
+  },
+];
+
+const advantages = [
+  {
+    icon: <FaCheckCircle className="w-4 h-4 lg:w-5 lg:h-5 text-blue-600" />,
+    description: "Cuidado dental personalizado basado en la confianza.",
+  },
+  {
+    icon: <FaCheckCircle className="w-4 h-4 lg:w-5 lg:h-5 text-blue-600" />,
     description:
-      "Apasionada por el diseño de sonrisas y la salud bucal, combina tecnología avanzada con un trato humano y cercano.",
-    src: "/images/doctora.webp",
+      "Profesionales con experiencia y reconocidos por su excelencia.",
+  },
+  {
+    icon: <FaCheckCircle className="w-4 h-4 lg:w-5 lg:h-5 text-blue-600" />,
+    description: "Especialistas apasionados por crear sonrisas auténticas.",
+  },
+  {
+    icon: <FaCheckCircle className="w-4 h-4 lg:w-5 lg:h-5 text-blue-600" />,
+    description: "Innovación y tecnología para resultados duraderos.",
   },
 ];
 
 function About() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+  });
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit();
+    }
+  }, [emblaApi]);
+
   return (
-    <div className="w-full max-w-xs lg:max-w-4xl xl:max-w-7xl mx-auto min-h-full flex justify-center items-center">
-      <div className="w-full flex flex-col gap-10 lg:gap-16 xl:gap-10 2xl:gap-20 pt-20 lg:pt-40 xl:pt-30 2xl:pt-40">
-        <div className="flex flex-col gap-2 lg:gap-4 xl:gap-8">
-          <h2 className="text-2xl lg:text-[40px] 2xl:text-[70px] font-semibold text-zinc-700 xl:leading-2 2xl:leading-10 text-center">
-            Conoce a{" "}
-            <span className="text-blue-600 font-extrabold">nuestro equipo</span>
-          </h2>
-          <p className="text-zinc-500 text-base lg:text-lg xl:text-xl 2xl:text-3xl font-medium text-center">
-            Contamos con un equipo de profesionales apasionados por la
-            odontología, en constante formación para ofrecerte los tratamientos
-            más innovadores y efectivos. Tu bienestar es nuestra prioridad.
-          </p>
-        </div>
-        <div className="gap-10 lg:gap-14 xl:gap-4 2xl:gap-10">
-          <div className="hidden xl:flex">
-            <FocusCards cards={cards} />
-          </div>
-          <div className="xl:hidden grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 px-4 md:px-0">
-            <div className="relative z-10 flex">
-              <div className="w-full h-full flex flex-col lg:flex-row bg-blue-600 rounded-3xl">
-                {/* Primera sombra curva */}
-                <div className="absolute inset-0 -z-10 bg-green-400 rounded-lg rotate-2 lg:rotate-[4deg] origin-bottom"></div>
-                {/* Segunda sombra más curva */}
-                <div className="absolute inset-0 -z-20 bg-yellow-300 rounded-lg rotate-4 lg:rotate-[8deg] origin-bottom"></div>
+    <div className="w-full lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto min-h-full flex flex-col justify-center items-center">
+      <div className="w-full grid grid-cols-1 xl:grid-cols-2 lg:gap-6 xl:gap-0 2xl:gap-20 pt-20 lg:pt-20 xl:pt-30 2xl:pt-40">
+        {/* ==== LEFT SIDE (IMÁGENES DOCTORES) ==== */}
+        <div className="relative flex justify-center items-center">
+          {/* ==== DESKTOP VERSION ==== */}
+          <DoctorsCards cards={cards} />
 
-                <Image
-                  src={Doctor}
-                  alt="Doctor"
-                  className="hidden lg:flex w-50 h-full rounded-l-3xl"
-                />
-                <Image
-                  src={Doctorm}
-                  alt="Doctor"
-                  className="flex lg:hidden w-full h-60 rounded-t-3xl"
-                />
-                <div className="p-4 space-y-2 text-white">
-                  <h2 className="text-base font-semibold">
-                    Dr. Alejandro Rivas
-                  </h2>
-                  <p className="text-sm italic font-medium">
-                    Especialista en Rehabilitación Oral
-                  </p>
-                  <p className="text-xs md:text-sm">
-                    Con más de 10 años de experiencia, enfocado en devolver la
-                    funcionalidad y estética dental mediante tratamientos
-                    personalizados y de alta precisión.
-                  </p>
+          {/* ==== MOBILE VERSION (CAROUSEL) ==== */}
+          <div className="xl:hidden w-full overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {cards.map((card, i) => (
+                <div
+                  key={i}
+                  className="flex-[0_0_80%] lg:flex-[0_0_30%] mx-auto relative min-w-0 p-4"
+                >
+                  <div className="relative w-full h-80 rounded-2xl overflow-hidden shadow-md">
+                    <Image
+                      src={card.src}
+                      alt={card.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="mt-4 text-center">
+                    <h3 className="text-lg font-semibold text-blue-600">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-zinc-500">{card.subtitle}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="relative z-10 flex">
-              <div className="w-full h-full flex flex-col lg:flex-row bg-blue-600 rounded-3xl">
-                {/* Primera sombra curva */}
-                <div className="absolute inset-0 -z-10 bg-green-400 rounded-lg rotate-2 lg:rotate-[4deg] origin-bottom"></div>
-                {/* Segunda sombra más curva */}
-                <div className="absolute inset-0 -z-20 bg-yellow-300 rounded-lg rotate-4 lg:rotate-[8deg] origin-bottom"></div>
-
-                <Image
-                  src={Doctora}
-                  alt="Doctor"
-                  className="hidden lg:flex w-50 h-full rounded-l-3xl"
-                />
-                <Image
-                  src={Doctoram}
-                  alt="Doctor"
-                  className="flex lg:hidden w-full h-60 rounded-t-3xl"
-                />
-                <div className="p-4 space-y-2 text-white">
-                  <h2 className="text-base font-semibold">
-                    Dra. Mariana Torres
-                  </h2>
-                  <p className="text-sm italic font-medium">
-                    Odontóloga Estética y Preventiva
-                  </p>
-                  <p className="text-xs md:text-sm">
-                    Apasionada por el diseño de sonrisas y la salud bucal,
-                    combina tecnología avanzada con un trato humano y cercano.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* ==== RIGHT SIDE (TEXTO Y DETALLES) ==== */}
+        <div className="flex flex-col gap-6 2xl:gap-10 px-6 lg:px-0">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl lg:text-2xl 2xl:text-4xl font-semibold text-zinc-700 text-start">
+              Sobre <span className="text-blue-600">Nosotros</span>
+            </h2>
+            <h3 className="text-2xl lg:text-3xl 2xl:text-5xl font-bold text-blue-600 text-start">
+              10 Años de Experiencia{" "}
+              <span className="text-zinc-700">en Cuidado Dental</span>
+            </h3>
+            <p className="text-zinc-700 text-base 2xl:text-lg font-medium text-start">
+              Contamos con un equipo de profesionales apasionados por la
+              odontología, en constante formación para ofrecerte los
+              tratamientos más innovadores y efectivos. Tu bienestar es nuestra
+              prioridad.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4 md:gap-5">
+            {advantages.map((items, i) => (
+              <div key={i} className="flex gap-3 items-start">
+                <div className="mt-0.5 md:mt-0">{items.icon}</div>
+                <p className="text-base 2xl:text-lg font-medium text-zinc-700 leading-5">
+                  {items.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="relative top-10 2xl:top-20 bg-blue-700">
+        <CurvedLoop
+          marqueeText="Ortodoncia  ✦  Blanqueamiento  ✦  Implante dental  ✦  Brackets  ✦  Cirugía dental  ✦ "
+          speed={1}
+          curveAmount={0}
+          direction="right"
+          interactive={false}
+          className="custom-text-style"
+        />
       </div>
     </div>
   );

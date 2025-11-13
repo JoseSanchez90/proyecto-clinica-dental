@@ -5,8 +5,11 @@ import clsx from "clsx";
 
 const links = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Servicios", href: "#servicios" },
   { label: "Nosotros", href: "#nosotros" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Casos", href: "#casos" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "¿Preguntas?", href: "#preguntas" },
 ];
 
 const date = [{ label: "Agendar Cita", href: "#cita" }];
@@ -15,47 +18,40 @@ export default function NavbarDesktop() {
   const [activeLink, setActiveLink] = useState("#inicio");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Cambiar fondo del navbar al hacer scroll
+  // Detectar scroll
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Detectar qué sección está visible
+  // Detectar sección activa
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveLink(`#${id}`);
-
-            // NO modifica la URL, solo actualiza el estado interno
+            setActiveLink(`#${entry.target.id}`);
             window.history.replaceState(null, "", window.location.pathname);
           }
         });
       },
       { threshold: 0.6 }
     );
-
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
+  // Scroll suave
   const handleClick = (href: string) => {
     const el = document.querySelector(href);
     if (!el) return;
 
     const lenis = (window as any).lenis;
-    if (lenis) {
-      lenis.scrollTo(el);
-    } else {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (lenis) lenis.scrollTo(el);
+    else el.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // cambia también la URL al hacer clic
     window.history.replaceState(null, "", window.location.pathname);
   };
 
@@ -63,24 +59,34 @@ export default function NavbarDesktop() {
     <nav
       className={clsx(
         "hidden lg:flex fixed w-full z-30 transition-all duration-300",
-        isScrolled
-          ? "bg-white/60 backdrop-blur-md py-3 shadow-md"
-          : "bg-transparent py-6"
+        isScrolled ? "bg-blue-900 shadow-lg py-4" : "bg-transparent py-6"
       )}
     >
-      <div className="flex items-center justify-between w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-6">
-        <p className="text-cyan-600 font-bold lg:text-xl xl:text-2xl 2xl:text-3xl">SMILE</p>
+      <div className="flex items-center justify-between w-full lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6">
+        {/* Logo */}
+        <button
+          onClick={() => handleClick("#inicio")}
+          className={clsx(
+            "font-bold lg:text-xl xl:text-2xl 2xl:text-3xl transition-colors duration-200 cursor-pointer",
+            isScrolled ? "text-white" : "text-blue-500"
+          )}
+        >
+          Smile
+        </button>
 
-        <div className="flex gap-4">
+        {/* Enlaces principales */}
+        <div className="flex gap-2 xl:gap-4">
           {links.map((item) => (
             <button
               key={item.href}
               onClick={() => handleClick(item.href)}
               className={clsx(
-                "relative px-4 py-2 lg:text-sm xl:text-base font-medium transition-all duration-200 cursor-pointer",
+                "relative px-4 py-2 lg:text-sm xl:text-base font-medium transition-all duration-200 cursor-pointer rounded-full",
                 activeLink === item.href
-                  ? "bg-blue-600 text-white rounded-full"
-                  : "text-zinc-800 hover:text-blue-600"
+                  ? "bg-blue-600 text-white shadow-md"
+                  : isScrolled
+                  ? "text-blue-100 hover:text-white hover:bg-blue-800"
+                  : "text-white hover:text-blue-400 hover:bg-white/10"
               )}
             >
               {item.label}
@@ -88,19 +94,21 @@ export default function NavbarDesktop() {
           ))}
         </div>
 
+        {/* Botón de cita */}
         <div>
           {date.map((menu, i) => (
-            <div key={i}>
-              <button
-                onClick={() => handleClick(menu.href)}
-                className={clsx("font-medium px-4 py-2 lg:text-sm xl:text-base transition-all duration-200 rounded-full cursor-pointer", activeLink === menu.href
-                  ? "border-none bg-blue-600 text-white"
-                  : "bg-white text-black border border-gray-500"
-                )}
-              >
-                {menu.label}
-              </button>
-            </div>
+            <button
+              key={i}
+              onClick={() => handleClick(menu.href)}
+              className={clsx(
+                "font-medium px-5 py-2 lg:text-sm xl:text-base rounded-full transition-all duration-300 cursor-pointer shadow-md",
+                isScrolled
+                  ? "bg-blue-600 text-white hover:bg-blue-500"
+                  : "bg-white text-blue-700 hover:bg-blue-100"
+              )}
+            >
+              {menu.label}
+            </button>
           ))}
         </div>
       </div>

@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import { chillax } from "./fonts/chillax";
 import SmoothScroll from "./components/SmoothScroll";
-import NavbarMobile from "./components/navbarMobile";
 import Footer from "./components/footer";
 
 export const metadata: Metadata = {
@@ -18,9 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body
-        className={`${chillax.className} antialiased`}
-      >
+      <body className={`${chillax.className} antialiased`}>
         <SmoothScroll />
         <Navbar />
         <main>{children}</main>
