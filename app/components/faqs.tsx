@@ -118,9 +118,14 @@ export default function Faqs() {
                 </p>
               </div>
             </div>
-            <button className="mt-6 bg-white text-blue-700 font-medium px-5 py-2 rounded-full hover:bg-blue-50 transition-all">
-              Contáctanos
-            </button>
+            <a
+              href="https://wa.me/51999888777"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 text-center bg-white text-blue-700 font-medium px-5 py-2 rounded-full hover:bg-blue-50 transition-all"
+            >
+              Escribenos
+            </a>
           </div>
         </div>
       </div>

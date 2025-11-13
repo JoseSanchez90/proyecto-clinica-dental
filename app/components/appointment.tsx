@@ -41,7 +41,7 @@ export default function Appointment() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 🔹 Control de pasos
+  // Control de pasos
   const handleNext = () => {
     if (validateStep()) setStep((prev) => prev + 1);
   };
@@ -104,7 +104,7 @@ export default function Appointment() {
 
           {/* ===== FORM STEPS ===== */}
           <form className="bg-white border border-gray-300 rounded-2xl p-6 2xl:p-8 shadow-lg">
-            <div className="relative overflow-hidden mx-auto 2xl:min-h-80">
+            <div className="relative overflow-visible mx-auto 2xl:min-h-80">
               <AnimatePresence mode="wait">
                 {/* 🔹 Paso 1 */}
                 {step === 1 && (
@@ -121,7 +121,7 @@ export default function Appointment() {
                       className="flex flex-col gap-2 2xl:gap-5"
                     >
                       {/* Fecha */}
-                      <div>
+                      <div className="relative">
                         <label className="block text-sm font-medium mb-1">
                           Fecha
                         </label>
@@ -382,7 +382,7 @@ export default function Appointment() {
       <AnimatePresence>
         {showModal && (
           <motion.div
-            className="fixed inset-0 bg-black/40 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

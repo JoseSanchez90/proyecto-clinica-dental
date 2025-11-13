@@ -35,16 +35,24 @@ export const ButtonDesktop: React.FC<ButtonProps> = ({
 
 export const ButtonDesktopSecondary: React.FC<ButtonProps> = ({
   label,
-  onClick,
   className = "",
   icon,
   type = "button",
 }) => {
+  const handleClick = () => {
+    const el = document.querySelector("#nosotros");
+    if (!el) return;
+
+    const lenis = (window as any).lenis;
+    if (lenis) lenis.scrollTo(el);
+    else el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <motion.button
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      onClick={onClick}
+      onClick={handleClick}
       type={type}
       className={`hidden md:inline-flex items-center gap-2 border border-gray-500 bg-white text-black font-medium px-10 py-4 rounded-full transition-all duration-150 cursor-pointer ${className}`}
     >
@@ -54,7 +62,7 @@ export const ButtonDesktopSecondary: React.FC<ButtonProps> = ({
   );
 };
 
-// 📱 Versión para móvil
+// Versión para móvil
 export const ButtonMobile: React.FC<ButtonProps> = ({
   label,
   onClick,
@@ -78,16 +86,24 @@ export const ButtonMobile: React.FC<ButtonProps> = ({
 
 export const ButtonMobileSecondary: React.FC<ButtonProps> = ({
   label,
-  onClick,
   className = "",
   icon,
   type = "button",
 }) => {
+  const handleClick = () => {
+    const el = document.querySelector("#nosotros");
+    if (!el) return;
+
+    const lenis = (window as any).lenis;
+    if (lenis) lenis.scrollTo(el);
+    else el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <motion.button
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.95 }}
-      onClick={onClick}
+      onClick={handleClick}
       type={type}
       className={`inline-flex md:hidden items-center gap-2 border border-gray-500 bg-white text-black font-medium px-5 py-3 rounded-full transition-all duration-150 ${className}`}
     >

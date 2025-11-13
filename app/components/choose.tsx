@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { FaCheckCircle, FaPlay } from "react-icons/fa";
 import { X } from "lucide-react";
+import { smoothScrollTo } from "@/utils/smoothScroll";
 
 function Choose() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -188,7 +189,9 @@ function Choose() {
 
             {/* Botón principal */}
             <div className="pt-2">
-              <button className="bg-blue-800 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all duration-300 shadow-md cursor-pointer">
+              <button 
+                onClick={() => smoothScrollTo("#cita")}
+                className="bg-blue-800 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all duration-300 shadow-md cursor-pointer">
                 Agendar una cita
               </button>
             </div>

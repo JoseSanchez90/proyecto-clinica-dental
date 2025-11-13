@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Dental from "@/public/images/dental.png";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -16,6 +18,7 @@ import Faqs from "./components/faqs";
 import Appointment from "./components/appointment";
 import Choose from "./components/choose";
 import Cases from "./components/cases";
+import { smoothScrollTo } from "@/utils/smoothScroll";
 
 export default function Home() {
   return (
@@ -71,10 +74,8 @@ export default function Home() {
                     icon={<FaWhatsapp className="w-4 h-4" />}
                   />
                 </a>
-                <a href="#nosotros">
-                  <ButtonDesktopSecondary label="Conócenos" />
-                  <ButtonMobileSecondary label="Conócenos" />
-                </a>
+                <ButtonDesktopSecondary label="Conócenos" />
+                <ButtonMobileSecondary label="Conócenos" />
               </div>
             </div>
 
