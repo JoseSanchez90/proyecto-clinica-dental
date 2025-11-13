@@ -26,7 +26,7 @@ export default function Home() {
         className="relative bg-[#0B1537] flex items-center justify-center w-full min-h-dvh text-center overflow-hidden"
       >
         {/* Fondo con las palabras grandes */}
-        <div className="absolute inset-0 hidden xl:flex flex-col items-center lg:items-start justify-center text-white/5 select-none pointer-events-none text-center lg:text-left lg:pl-20 xl:pl-40">
+        <div className="absolute inset-0 flex flex-col items-center lg:items-start justify-center text-white/5 select-none pointer-events-none text-center lg:text-left lg:pl-20 xl:pl-40">
           <h1 className="text-[clamp(4rem,8vw,15rem)] xl:text-[clamp(8rem,8vw,15rem)] font-extrabold leading-50 lg:leading-50 xl:leading-40 2xl:leading-60 tracking-wide">
             SEGURIDAD
           </h1>

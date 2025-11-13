@@ -107,14 +107,15 @@ export default function NavbarMobile() {
       )}
     >
       {/* Logo */}
-      <p
+      <button
+        onClick={() => handleClick("#inicio")}
         className={clsx(
           "font-bold text-2xl transition-all duration-200",
           isScrolled ? "text-blue-800" : "text-white"
         )}
       >
         Smile
-      </p>
+      </button>
 
       {/* Botón hamburguesa */}
       <button
