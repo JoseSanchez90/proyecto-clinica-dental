@@ -90,7 +90,7 @@ function Choose() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-12 2xl:gap-20 items-center w-full">
           {/* ==== COLUMNA IZQUIERDA (IMAGEN / VIDEO) ==== */}
           <div className="flex justify-center items-center relative">
-            <div className="relative w-60 h-60 lg:w-80 lg:h-80 xl:w-68 xl:h-68 2xl:w-96 2xl:h-96 rounded-full overflow-hidden shadow-xl group">
+            <div className="relative w-60 h-60 md:w-80 md:h-80 xl:w-68 xl:h-68 2xl:w-96 2xl:h-96 rounded-full overflow-hidden shadow-xl group">
               {isPlaying ? (
                 <>
                   <video

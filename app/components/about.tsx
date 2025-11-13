@@ -70,7 +70,7 @@ function About() {
               {cards.map((card, i) => (
                 <div
                   key={i}
-                  className="flex-[0_0_80%] lg:flex-[0_0_30%] mx-auto relative min-w-0 p-4"
+                  className="flex-[0_0_80%] md:flex-[0_0_31%] lg:flex-[0_0_30%] mx-auto relative min-w-0 p-4"
                 >
                   <div className="relative w-full h-80 rounded-2xl overflow-hidden shadow-md">
                     <Image

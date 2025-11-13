@@ -100,10 +100,10 @@ function Services() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="flex-[0_0_80%] lg:flex-[0_0_35%] xl:flex-[0_0_80%] bg-zinc-100 rounded-3xl shadow-md hover:shadow-lg transition-all duration-500 cursor-pointer"
+                className="flex-[0_0_80%] md:flex-[0_0_40%] lg:flex-[0_0_35%] xl:flex-[0_0_80%] bg-zinc-100 rounded-3xl shadow-md hover:shadow-lg transition-all duration-500 cursor-pointer"
               >
                 {/* Imagen */}
-                <div className="relative w-full h-52">
+                <div className="relative w-full h-52 md:h-80 lg:h-52">
                   <Image
                     src={service.image}
                     alt={service.title}

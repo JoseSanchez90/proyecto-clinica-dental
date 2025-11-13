@@ -89,10 +89,10 @@ function Cases() {
               {cases.map((item, i) => (
                 <div
                   key={i}
-                  className="flex-[0_0_85%] lg:flex-[0_0_31%] xl:flex-[0_0_31%] 2xl:flex-[0_0_31%] relative rounded-3xl overflow-hidden shadow-xl group"
+                  className="flex-[0_0_85%] md:flex-[0_0_46%] lg:flex-[0_0_31%] xl:flex-[0_0_31%] 2xl:flex-[0_0_31%] relative rounded-3xl overflow-hidden shadow-xl group"
                 >
                   {/* Imagen */}
-                  <div className="relative w-full h-[350px] lg:h-80 xl:h-[250px] 2xl:h-[380px]">
+                  <div className="relative w-full h-[350px] md:h-[500px] lg:h-80 xl:h-[250px] 2xl:h-[380px]">
                     <Image
                       src={item.image}
                       alt={item.title}
